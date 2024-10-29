@@ -41,18 +41,3 @@ ENTRYPOINT ["uvicorn", "app.main:app"]
 
 # Define some sane defaults which can be overridden at runtime if required
 CMD ["--host", "0.0.0.0", "--port", "8000", "--workers", "2"]
-
-
-# Do not put SSH keys or secrets into a Docker image. 12 factor app
-# Use system group when adding group
-# Use a Python alpine base image and remove python-dev package
-# Pin the base image to a tag, not latest
-# Use latest verison of poetry
-# Version parameter not required in poetry install as we are using the POETRY_VERSION env var
-# Add a WORKDIR and set the ownership to the non-root user
-# Set POETRY_VIRTUALENVS_CREATE to avoid using virutal envs as installing into single image. produciton
-# poetry install: --only-dev is deprecated in favour of --only main.
-# Remove 'poetry run' (executes command inside virutalenv) as we have disabled virtualenvs
-# Split entrypoint and cmd to enable optional config to be passed at runtime
-# Add the main:app reference to CMD to reference the source app
-# Remove all un-neded packages to run app. Can add more as needed. Remove curl after use and remove cache
