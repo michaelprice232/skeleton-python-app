@@ -1,1 +1,0 @@
-module skeleton-python-app
