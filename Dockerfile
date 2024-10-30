@@ -1,5 +1,5 @@
 # Use the official Python image as the base image
-FROM python:3.13-alpine3.20
+FROM python:3.12-alpine3.20
 
 # Set environment variables for Poetry installation
 ENV POETRY_VERSION=1.8.4 \
@@ -24,10 +24,10 @@ WORKDIR /app
 # Copy pyproject.toml and poetry.lock to the container
 COPY pyproject.toml poetry.lock ./
 
-# Install dependencies as root
+# Install Python dependencies
 RUN poetry install --no-root --only main --no-interaction --no-ansi
 
-# Copy the application files as the non-root user
+# Copy the application files
 COPY . .
 
 # Change to non-root user
